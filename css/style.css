@@ -10,11 +10,40 @@ td {
 td:hover{
   cursor:grab;
   background-color: lightblue;
-  color: lightblue;
 }
 
 table{
     margin-left: auto;
     margin-right: auto;
     margin-top: 30%;
+}
+.timer{
+  width: 100px;
+  height: 50px;
+  background-color: aqua;
+  display: inline-flex;
+  position: absolute;
+  left: 70%;
+  top: 450px;
+  font-size: larger;
+  text-align: center;
+  padding-left: 70px;
+  padding-top: 35px;
+
+}
+
+
+.borad button{
+  margin: 10px;
+  position: relative;
+  left: 35%;
+  top: 340px;
+  background-color: rgba(86, 85, 138, 0.488);
+  display: inline-flex;
+  border-radius: 12%;
+  width: 100px;
+  text-align: auto;
+  padding: 10px;
+  font-weight: 800;
+  
 }

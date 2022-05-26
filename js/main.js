@@ -1,15 +1,18 @@
 'use strict'
 
 var gBoard;
-var SIZE = 4;
+var gSize = 4;
+var gMines = 2;
+
 
 function initGame(){
-    gBoard = buildBoard(SIZE,6);
+    gBoard = buildBoard(gSize,14)
     check4Neg()
     renderBoard(gBoard)
 }
 function restartGame(){
-    gBoard = buildBoard();
+    gBoard = buildBoard()
+    check4Neg()
     renderBoard(gBoard)
 
 }
@@ -50,7 +53,12 @@ function renderBoard(board) {
         strHtml += '<tr>';
         for (var j = 0; j < board.length; j++) {
             var tdId = `cell-${i}-${j}`;
-            strHtml += `<td class="${tdId}" onclick="cellClicked(this)">${setMinesNegsCount(i,j)}
+            var currCell = gBoard[i][j]
+            var isMine = currCell.isMine
+            var inCell = ''
+            if(currCell.isMine){inCell = '*'}
+            else{inCell = setMinesNegsCount(i,j)}
+            strHtml += `<td class="${tdId}" onclick="cellClicked(this)">${inCell}
             </td>`
         }
         strHtml += '</tr>';
@@ -63,8 +71,10 @@ function renderBoard(board) {
 function cellClicked(elCell) {
     var cellPos = getCellLoacation(elCell)
     console.log(cellPos)
+    console.log(gBoard[cellPos[0]][cellPos[1]])
     elCell = setMinesNegsCount(cellPos[0],cellPos[1])
     if(!gBoard[cellPos[0]][cellPos[1]].isShown){gBoard[cellPos[0]][cellPos[1]].isShown = true}
+    
 
 }
 
@@ -111,9 +121,20 @@ function flagCell(elCell){
 
 
 function check4Neg(){
-    for(var i = 0; i < SIZE; i++){
-        for( var j = 0; j < SIZE; j++){
+    for(var i = 0; i < gSize; i++){
+        for( var j = 0; j < gSize; j++){
             setMinesNegsCount(i,j)
         }
     }
+}
+
+
+function changeDifficutly(size, mines){
+    gSize = size
+    gMines = mines
+    gBoard = buildBoard(gSize,gMines)
+    check4Neg()
+    renderBoard(gBoard)
+
+
 }
