@@ -15,6 +15,8 @@ function initGame(){
 function restartGame(){
     startGame()
     initGame()
+    var lostMsg = document.querySelector('.loss')
+    lostMsg.style.display = 'none'
 }
 function buildBoard(size = 4, mines = 2) {
     var board = [];
@@ -39,10 +41,7 @@ function buildBoard(size = 4, mines = 2) {
         else {d--}
 
     }
-    console.log(mineLocations)
 
-
-    console.table(board);
     return board;
 
 }
@@ -65,7 +64,6 @@ function renderBoard(board) {
     }
     var elMat = document.querySelector('.game-Borad');
     elMat.innerHTML = strHtml;
-    console.log(strHtml)
 }
 
 function cellClicked(elCell) {
@@ -73,6 +71,8 @@ function cellClicked(elCell) {
     var currCell = gBoard[cellPos[0]][cellPos[1]]
     console.log(cellPos)
     console.log(currCell)
+    if(currCell.isMine){lost()}
+    if(!currCell.isMine){elCell.style.color = 'black'}
     console.log(cellPos[0],cellPos[1])
     if(!currCell.isShown){currCell.isShown = true}
     
@@ -155,12 +155,14 @@ function setTimer() {
         gElapsedTime = setInterval(function(){
               elapsedTime += 1;
               timer.innerText = elapsedTime
-              console.log(elapsedTime)
+            //   console.log(elapsedTime)
               gIstimer = true
             }, 1000);
         }
   }
 
-function checkCell(elCell){
-
+function lost(){
+    var lostMsg = document.querySelector('.loss')
+    lostMsg.style.display = 'block'
+    console.log(lostMsg)
 }

@@ -13,13 +13,16 @@
         <button onclick="changeDifficutly(4,2)" class="difficultyLevel">Easy</button>
         <button onclick="changeDifficutly(8,12)"class="difficultyLevel">Medium</button>
         <button onclick="changeDifficutly(12,30)"class="difficultyLevel">Hard</button>
+        <button onclick="restartGame()" class="reset-timer">Reset the game</button>
         <div class="timer"></div>
     </div>
     <table onclick ='setTimer()' class="game-Borad">
         
     </table>
+    <div class="loss">you lost!<div>
+        <button onclick="restartGame()">Restart the game</button>
+    </div>
 </div>
-<button onclick="restartGame()" class="reset-timer">Reset the game</button>
 
 
     <script src="js/main.js"></script>
