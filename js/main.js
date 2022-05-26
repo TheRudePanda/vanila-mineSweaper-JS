@@ -55,9 +55,11 @@ function renderBoard(board) {
             var currCell = gBoard[i][j]
             var isMine = currCell.isMine
             var inCell = ''
-            if(currCell.isMine){inCell = '*'}
+            if(currCell.isMine){inCell = '<img class="imgs" src="img/bomb.png">'}
             else{inCell = setMinesNegsCount(i,j)}
-            strHtml += `<td class="${tdId}" onclick="cellClicked(this)" >${inCell}
+            strHtml += `<td class="${tdId}"
+            onclick="cellClicked(this)"
+            onmousedown="flagCell(this)" >${inCell}
             </td>`
         }
         strHtml += '</tr>';
@@ -165,4 +167,7 @@ function lost(){
     var lostMsg = document.querySelector('.loss')
     lostMsg.style.display = 'block'
     console.log(lostMsg)
+    var bombImg = document.querySelector('.imgs')
+    bombImg.style.display = 'block'
 }
+
