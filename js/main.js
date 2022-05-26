@@ -3,18 +3,18 @@
 var gBoard;
 var gSize = 4;
 var gMines = 2;
+var gElapsedTime = 0;
+var gIstimer = false ;
 
 
 function initGame(){
-    gBoard = buildBoard(gSize,14)
+    gBoard = buildBoard(gSize,gMines)
     check4Neg()
     renderBoard(gBoard)
 }
 function restartGame(){
-    gBoard = buildBoard()
-    check4Neg()
-    renderBoard(gBoard)
-
+    startGame()
+    initGame()
 }
 function buildBoard(size = 4, mines = 2) {
     var board = [];
@@ -58,7 +58,7 @@ function renderBoard(board) {
             var inCell = ''
             if(currCell.isMine){inCell = '*'}
             else{inCell = setMinesNegsCount(i,j)}
-            strHtml += `<td class="${tdId}" onclick="cellClicked(this)">${inCell}
+            strHtml += `<td class="${tdId}" onclick="cellClicked(this)" >${inCell}
             </td>`
         }
         strHtml += '</tr>';
@@ -70,10 +70,11 @@ function renderBoard(board) {
 
 function cellClicked(elCell) {
     var cellPos = getCellLoacation(elCell)
+    var currCell = gBoard[cellPos[0]][cellPos[1]]
     console.log(cellPos)
-    console.log(gBoard[cellPos[0]][cellPos[1]])
-    elCell = setMinesNegsCount(cellPos[0],cellPos[1])
-    if(!gBoard[cellPos[0]][cellPos[1]].isShown){gBoard[cellPos[0]][cellPos[1]].isShown = true}
+    console.log(currCell)
+    console.log(cellPos[0],cellPos[1])
+    if(!currCell.isShown){currCell.isShown = true}
     
 
 }
@@ -136,5 +137,30 @@ function changeDifficutly(size, mines){
     check4Neg()
     renderBoard(gBoard)
 
+
+}
+
+function startGame(){
+    var timer = document.querySelector('.timer')
+    gIstimer = false
+    console.log(gIstimer)
+    clearInterval(gElapsedTime)
+
+}
+
+function setTimer() {
+    var timer = document.querySelector('.timer')
+    if(!gIstimer){
+        var elapsedTime = 0
+        gElapsedTime = setInterval(function(){
+              elapsedTime += 1;
+              timer.innerText = elapsedTime
+              console.log(elapsedTime)
+              gIstimer = true
+            }, 1000);
+        }
+  }
+
+function checkCell(elCell){
 
 }
